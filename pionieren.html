@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pionieren in de DDR</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script> 
+</head>
+<body>
+<a-scene>
+
+  <a-assets>
+    <a-image id="gang" src="assets/img/Gang.JPG" crossorigin="anonymous"></a-image>
+    <a-image id="huisje" src="assets/img/huisje.jpg" crossorigin="anonymous"></a-image>
+    <a-image id="direction-pijl" src="assets/nav/Direction.png" crossorigin="anonymous"></a-image>
+    <!-- DirectionFull.png in assets was intented to serve as 'highlighted' button on hover, indicating interaction -->
+    <audio id="audio-kaart" src="assets/audio/Uniform.mp3" loop="false"></audio>
+<audio id="audio-achtergrond" src="assets/audio/achtergrondgeluid.m4a" loop="true" crossorigin="anonymous"></audio>
+<video id="anne" loop="false" src="assets/video/anne.webm"></video>
+
+    
+  <!-- reusable components, created in js-file per room with different attributes -->
+    <a-mixin id="nav-mixin" geometry="primitive: circle; radius: 0.5" material="src: #direction-pijl; opacity: 0.5" visible="false" class="interactable" data-raycastable></a-mixin>
+    <a-mixin id="plus-mixin" geometry="primitive: circle; radius: 0.2" material="color: #07ca2e; opacity: 0" visible="false" class="interactable" data-raycastable></a-mixin>
+    <a-mixin id="video-mixin" geometry="primitive: circle; radius: 0.2" material="color: #ffffff; opacity: 0" visible="false" class="interactable" data-raycastable></a-mixin>
+  </a-assets>
+
+  <!-- this element holds the room photos, initial photo is the hallway -->
+  <a-sky id="sky-foto" src="#gang" npot="true" rotation="0 -130 0"></a-sky>
+
+  <a-entity camera look-controls wasd-controls position="0 2.6 0"
+            cursor="rayOrigin: mouse"
+            raycaster="objects: .interactable"></a-entity>
+
+  <a-entity id="start-button" geometry="primitive: plane; width: 2; height: 1" 
+            material="color: #007bff; opacity: 0.8" position="0 1.5 -3" 
+            text="value: Start; align: center; width: 4;"
+            class="interactable" data-raycastable></a-entity>
+
+</a-scene>
+</body>
+<script src="pionieren.js"></script>
+</html>
